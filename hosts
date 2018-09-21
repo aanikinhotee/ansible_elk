@@ -1,0 +1,11 @@
+[elasticsearch]
+dev-project1 public_ip_needed=True ansible_user=admina
+dev-project2 public_ip_needed=True ansible_user=admina
+dev-project3 public_ip_needed=True ansible_user=admina
+
+[kibana]
+dev-project4 public_ip_needed=True ansible_user=admina
+
+[logstash]
+dev-project5 public_ip_needed=True ansible_user=admina
+

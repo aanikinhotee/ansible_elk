@@ -1,0 +1,26 @@
+- hosts: elasticsearch
+  become: no
+  gather_facts: no
+  serial: 1
+  roles:
+    - update
+    - install_elasticsearch
+
+
+#- hosts: kibana
+#  become: no
+#  gather_facts: no
+#  serial: 1
+#  roles:
+#    - update
+#    - install_kibana
+
+
+- hosts: logstash
+  become: no
+  gather_facts: no
+  serial: 1
+  roles:
+    - update
+    - install_logstash
+

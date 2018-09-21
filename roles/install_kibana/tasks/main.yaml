@@ -1,0 +1,64 @@
+- name: copying rpm files
+  copy:
+    src: rpms
+    dest: /tmp/
+    owner: admina
+    group: admina
+    mode: 0644
+
+- name: install java rpm from a local file
+  become: true
+  yum:
+    name: /tmp/rpms/jdk-8u181-linux-x64.rpm
+    state: present
+
+
+- name: add elasticsearch public GPG key
+  become: true
+  rpm_key:
+    state: present
+    key: http://packages.elastic.co/GPG-KEY-elasticsearch
+
+
+- name: Add yum repository for kibana
+  become: true
+  yum_repository:
+    name: kibana-4.4
+    description: Kibana repository for 4.4.x packages
+    file: kibana
+    baseurl: http://packages.elastic.co/kibana/4.4/centos
+    gpgcheck: yes
+    gpgkey: http://packages.elastic.co/GPG-KEY-elasticsearch
+    enabled: yes
+
+
+- name: install the latest version of kibana
+  become: true
+  yum:
+    name: kibana
+    state: latest
+
+
+- name: copying kibana config
+  become: true
+  copy:
+    src: config/kibana.yml
+    dest: /opt/kibana/config/kibana.yml
+    owner: root
+    group: root
+    mode: 0664
+
+
+- name: Restart service kibana, in all cases
+  become: true
+  service:
+    name: kibana
+    state: restarted
+    enabled: yes
+
+- name: open service in firewall
+  become: true
+  firewalld:
+    service: kibana
+    permanent: true
+    state: enabled
