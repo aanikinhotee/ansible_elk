@@ -1,11 +1,17 @@
 [elasticsearch]
-dev-project1 ansible_user=admina
-dev-project2 ansible_user=admina
-dev-project3 ansible_user=admina
+dev-project1
+dev-project2
+dev-project3
 
 [kibana]
-dev-project4 ansible_user=admina
+dev-project4
+
+[kibana:vars]
+elastic_node=http://dev-project1:9200
+
 
 [logstash]
-dev-project5 ansible_user=admina
+dev-project5
 
+[logstash:vars]
+elastic_nodes=["dev-project1:9200", "dev-project2:9200", "dev-project3:9200"]

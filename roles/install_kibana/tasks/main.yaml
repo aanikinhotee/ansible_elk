@@ -39,14 +39,9 @@
     state: latest
 
 
-- name: copying kibana config
+- name: copying kibana config from template
   become: true
-  copy:
-    src: config/kibana.yml
-    dest: /opt/kibana/config/kibana.yml
-    owner: root
-    group: root
-    mode: 0664
+  template: src=kibana.yml dest=/opt/kibana/config/kibana.yml owner=root group=root mode=0664
 
 
 - name: Restart service kibana, in all cases

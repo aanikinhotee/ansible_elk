@@ -39,14 +39,19 @@
     state: latest
 
 
-- name: copying logstash config
+- name: copying logstash 02-beats-input.conf config from template
   become: true
-  copy:
-    src: config/logstash/
-    dest: /etc/logstash/conf.d/
-    owner: root
-    group: root
-    mode: 0664
+  template: src=logstash/02-beats-input.conf dest=/etc/logstash/conf.d/02-beats-input.conf owner=root group=root mode=0664
+
+
+- name: copying logstash 10-syslog-filter.conf config from template
+  become: true
+  template: src=logstash/10-syslog-filter.conf dest=/etc/logstash/conf.d/10-syslog-filter.conf owner=root group=root mode=0664
+
+
+- name: copying logstash 30-elasticsearch-output.conf config from template
+  become: true
+  template: src=logstash/30-elasticsearch-output.conf dest=/etc/logstash/conf.d/30-elasticsearch-output.conf owner=root group=root mode=0664
 
 
 - name: Restart service logstash, in all cases
