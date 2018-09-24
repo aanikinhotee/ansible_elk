@@ -3,4 +3,3 @@
   yum:
     name: '*'
     state: latest
-  when: public_ip_needed

@@ -38,11 +38,31 @@
     name: logstash
     state: latest
 
+
+- name: copying logstash config
+  become: true
+  copy:
+    src: config/logstash/
+    dest: /etc/logstash/conf.d/
+    owner: root
+    group: root
+    mode: 0664
+
+
 - name: Restart service logstash, in all cases
   become: true
   service:
-    name: elasticsearch
+    name: logstash
     state: restarted
     enabled: yes
 
+
+- name: open logstash service in firewall
+  become: true
+  firewalld:
+    port: 5044/tcp
+    permanent: true
+    state: enabled
+    zone: public
+    immediate: true
 

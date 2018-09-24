@@ -3,17 +3,17 @@
   gather_facts: no
   serial: 1
   roles:
-    - update
+#    - update
     - install_elasticsearch
 
 
-#- hosts: kibana
-#  become: no
-#  gather_facts: no
-#  serial: 1
-#  roles:
+- hosts: kibana
+  become: no
+  gather_facts: no
+  serial: 1
+  roles:
 #    - update
-#    - install_kibana
+    - install_kibana
 
 
 - hosts: logstash
@@ -21,6 +21,6 @@
   gather_facts: no
   serial: 1
   roles:
-    - update
+#    - update
     - install_logstash
 
