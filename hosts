@@ -1,17 +1,18 @@
 [elasticsearch]
-dev-project1
-dev-project2
-dev-project3
+D1AZ-Logging1.onelum.net
+D1AZ-Logging2.onelum.net
+D1AZ-Logging3.onelum.net
 
 [kibana]
-dev-project4
+D1AZ-LoggingDMZ.onelum.net
 
 [kibana:vars]
 elastic_node=http://dev-project1:9200
 
 
 [logstash]
-dev-project5
+D1AZ-Logging4
+D1AZ-Logging5
 
 [logstash:vars]
-elastic_nodes=["dev-project1:9200", "dev-project2:9200", "dev-project3:9200"]
+elastic_nodes=["D1AZ-Logging1.onelum.net:9200", "D1AZ-Logging2.onelum.net:9200", "D1AZ-Logging3.onelum.net:9200"]
