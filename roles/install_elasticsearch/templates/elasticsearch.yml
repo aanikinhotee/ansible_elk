@@ -16,7 +16,7 @@
 #
 # cluster.name: my-application
 
-cluster.name: production
+cluster.name: development
 
 #
 # ------------------------------------ Node ------------------------------------
@@ -76,7 +76,7 @@ network.host: "0.0.0.0"
 # discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 #
 
-discovery.zen.ping.unicast.hosts: ["dev-project1", "dev-project2", "dev-project3"]
+discovery.zen.ping.unicast.hosts: {{ elastic_nodes }}
 
 # Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
 #

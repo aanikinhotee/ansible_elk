@@ -3,16 +3,19 @@ D1AZ-Logging1.onelum.net
 D1AZ-Logging2.onelum.net
 D1AZ-Logging3.onelum.net
 
+[elasticsearch:vars]
+elastic_nodes=["D1AZ-Logging1.onelum.net", "D1AZ-Logging2.onelum.net", "D1AZ-Logging3.onelum.net"]
+
 [kibana]
 D1AZ-LoggingDMZ.onelum.net
 
 [kibana:vars]
-elastic_node=http://dev-project1:9200
+elastic_node=http://D1AZ-Logging1.onelum.net:9200
 
 
 [logstash]
-D1AZ-Logging4
-D1AZ-Logging5
+D1AZ-Logging4.onelum.net
+D1AZ-Logging5.onelum.net
 
 [logstash:vars]
 elastic_nodes=["D1AZ-Logging1.onelum.net:9200", "D1AZ-Logging2.onelum.net:9200", "D1AZ-Logging3.onelum.net:9200"]

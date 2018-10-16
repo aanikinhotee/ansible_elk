@@ -1,15 +1,14 @@
-- name: copying rpm files
-  copy:
-    src: rpms
-    dest: /tmp/
-    owner: admina
-    group: admina
-    mode: 0644
+# Put SELinux in permissive mode, logging actions that would be blocked.
+- name: change selinux settings to permissive mode
+  become: true
+  selinux:
+    policy: targeted
+    state: permissive
 
-- name: install java rpm from a local file
+- name: install java 1.8 openjdk 
   become: true
   yum:
-    name: /tmp/rpms/jdk-8u181-linux-x64.rpm
+    name: java-1.8.0-openjdk
     state: present
 
 
@@ -39,10 +38,33 @@
     state: latest
 
 
+- name: Add yum repository for nginx
+  become: true
+  yum_repository:
+    name: nginx-repo
+    description: Nginx repository for nginx packages
+    file: nginx
+    baseurl: http://nginx.org/packages/mainline/rhel/7/$basearch/
+    gpgcheck: no
+    enabled: yes
+
+
+
+- name: install  NGINX
+  become: true
+  yum:
+    name: nginx
+    state: latest
+
+
 - name: copying kibana config from template
   become: true
   template: src=kibana.yml dest=/opt/kibana/config/kibana.yml owner=root group=root mode=0664
 
+
+- name: copying nginx config from template
+  become: true
+  template: src=nginx.conf dest=/etc/nginx/conf.d/default.conf owner=root group=root mode=655
 
 - name: Restart service kibana, in all cases
   become: true
@@ -51,10 +73,33 @@
     state: restarted
     enabled: yes
 
+- name: Restart service nginx, in all cases
+  become: true
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
+
+
+- name: Start service nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
 - name: open service in firewall
   become: true
   firewalld:
     service: kibana
+    permanent: true
+    state: enabled
+    zone: public
+    immediate: true
+
+- name: open nginx 80 port in firewall
+  become: true
+  firewalld:
+    port: 80/tcp
     permanent: true
     state: enabled
     zone: public
