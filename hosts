@@ -19,3 +19,7 @@ D1AZ-Logging5.onelum.net
 
 [logstash:vars]
 elastic_nodes=["D1AZ-Logging1.onelum.net:9200", "D1AZ-Logging2.onelum.net:9200", "D1AZ-Logging3.onelum.net:9200"]
+
+
+[all:vars]
+logstash_nodes=["D1AZ-Logging4.onelum.net:5044", "D1AZ-Logging5.onelum.net:5044"]

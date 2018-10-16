@@ -22,5 +22,5 @@
   serial: 1
   roles:
     - update
-#    - install_logstash
+    - install_logstash
 

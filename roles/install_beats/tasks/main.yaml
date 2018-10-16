@@ -1,0 +1,31 @@
+- name: Add yum repository for beats
+  become: true
+  yum_repository:
+    name: beats
+    description: Elastic repository for 6.x packages
+    file: beats
+    baseurl: https://artifacts.elastic.co/packages/6.x/yum
+    gpgcheck: yes
+    gpgkey: http://packages.elastic.co/GPG-KEY-elasticsearch
+    enabled: yes
+
+
+- name: install the latest version of beats
+  become: true
+  yum:
+    name: filebeat
+    state: latest
+
+
+- name: copying filebeat.yml config from template
+  become: true
+  template: src=filebeat.yml dest=/etc/filebeat/filebeat.yml owner=root group=root mode=0600
+
+- name: Restart service filebeat, in all cases
+  become: true
+  service:
+    name: filebeat
+    state: restarted
+    enabled: yes
+
+# filebeat setup --template -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["D1AZ-Logging1.onelum.net:9200", "D1AZ-Logging2.onelum.net:9200", "D1AZ-Logging3.onelum.net:9200"]'
