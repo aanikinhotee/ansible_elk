@@ -1,0 +1,40 @@
+- name: Install EPEL repo.
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+
+- name: install the latest version of redis
+  become: true
+  yum:
+    name: redis
+    state: latest
+
+
+- name: copying redis.conf config from template
+  become: true
+  template: src=redis-master.conf dest=/etc/redis.conf owner=redis group=root mode=0640
+  when: master
+
+- name: copying redis.conf config from template
+  become: true
+  template: src=redis-slave.conf dest=/etc/redis.conf owner=redis group=root mode=0640
+  when: not master
+
+
+- name: Restart service redis, in all cases
+  become: true
+  service:
+    name: redis
+    state: restarted
+    enabled: yes
+
+- name: open redis 6379 port in firewall
+  become: true
+  firewalld:
+    port: 6379/tcp
+    permanent: true
+    state: enabled
+    zone: public
+    immediate: true
+

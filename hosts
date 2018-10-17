@@ -20,6 +20,11 @@ D1AZ-Logging5.onelum.net
 [logstash:vars]
 elastic_nodes=["D1AZ-Logging1.onelum.net:9200", "D1AZ-Logging2.onelum.net:9200", "D1AZ-Logging3.onelum.net:9200"]
 
+[redis]
+D1AZ-Logging4.onelum.net master=True
+D1AZ-Logging5.onelum.net master=False master_node=D1AZ-Logging4.onelum.net
+
 
 [all:vars]
 logstash_nodes=["D1AZ-Logging4.onelum.net:5044", "D1AZ-Logging5.onelum.net:5044"]
+ansible_distribution_major_version=7.5
