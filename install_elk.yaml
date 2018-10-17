@@ -24,3 +24,12 @@
     - update
     - install_logstash
 
+
+- hosts: redis
+  become: no
+  gather_facts: no
+  serial: 1
+  roles:
+    - install_redis
+
+

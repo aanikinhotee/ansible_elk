@@ -22,10 +22,10 @@
 - name: Add yum repository for kibana
   become: true
   yum_repository:
-    name: kibana-4.4
-    description: Kibana repository for 4.4.x packages
+    name: kibana-6.4
+    description: Kibana repository for 6.4.x packages
     file: kibana
-    baseurl: http://packages.elastic.co/kibana/4.4/centos
+    baseurl: https://artifacts.elastic.co/packages/6.x/yum
     gpgcheck: yes
     gpgkey: http://packages.elastic.co/GPG-KEY-elasticsearch
     enabled: yes
@@ -59,7 +59,7 @@
 
 - name: copying kibana config from template
   become: true
-  template: src=kibana.yml dest=/opt/kibana/config/kibana.yml owner=root group=root mode=0664
+  template: src=kibana.yml dest=/etc/kibana/kibana.yml owner=root group=root mode=0664
 
 
 - name: copying nginx config from template

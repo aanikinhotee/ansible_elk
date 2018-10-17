@@ -148,10 +148,19 @@ setup.kibana:
   #username: "elastic"
   #password: "changeme"
 
+
+output.redis:
+  hosts: {{ redis_master }} 
+  password: "rE0AuBNnngpHJjrUv2jr"
+  key: "filebeat"
+  db: 0
+  timeout: 5
+
+
 #----------------------------- Logstash output --------------------------------
-output.logstash:
+#output.logstash:
   # The Logstash hosts
-  hosts: {{ logstash_nodes }}
+  #hosts: {{ logstash_nodes }}
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications

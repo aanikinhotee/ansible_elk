@@ -104,3 +104,5 @@ discovery.zen.ping.unicast.hosts: {{ elastic_nodes }}
 #
 # action.destructive_requires_name: true
 
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch

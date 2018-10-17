@@ -14,8 +14,8 @@ elastic_node=http://D1AZ-Logging1.onelum.net:9200
 
 
 [logstash]
-D1AZ-Logging4.onelum.net
-D1AZ-Logging5.onelum.net
+D1AZ-Logging4.onelum.net redis_host=D1AZ-Logging4.onelum.net redis_password=rE0AuBNnngpHJjrUv2jr
+D1AZ-Logging5.onelum.net redis_host=D1AZ-Logging4.onelum.net redis_password=rE0AuBNnngpHJjrUv2jr
 
 [logstash:vars]
 elastic_nodes=["D1AZ-Logging1.onelum.net:9200", "D1AZ-Logging2.onelum.net:9200", "D1AZ-Logging3.onelum.net:9200"]
@@ -28,3 +28,4 @@ D1AZ-Logging5.onelum.net master=False master_node=D1AZ-Logging4.onelum.net
 [all:vars]
 logstash_nodes=["D1AZ-Logging4.onelum.net:5044", "D1AZ-Logging5.onelum.net:5044"]
 ansible_distribution_major_version=7.5
+redis_master=["D1AZ-Logging4.onelum.net"]
